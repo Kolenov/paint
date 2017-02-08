@@ -1,0 +1,9 @@
+{
+  "name": "paint",
+  "version": "0.0.1",
+  "scripts": {
+    "sass": "node-sass --output-style expanded -w scss/ -o css/",
+    "build-js": "browserify ./src/js/index.js -o ./dist/js/index.js -d",
+    "watch-js": "watchify ./src/js/index.js -o ./dist/js/index.js --debug --verbose"
+  }
+}

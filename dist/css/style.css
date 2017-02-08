@@ -1,0 +1,63 @@
+body {
+    background-color: #CCCCCC;
+}
+
+.container {
+    width: 1000px;
+    max-width: none !important;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container__playground {
+    width: 1000px;
+    height: 480px;
+}
+
+.playground {
+    background-color: white;
+    border: solid 1px;
+}
+
+.playground__toolbar {
+    float: right;
+    width: 128px;
+    height: 480px;
+
+}
+
+.toolbar {
+    border-left: solid 1px;
+
+}
+
+
+.playground__canvas {
+    float: left;
+    height: 480px;
+}
+
+.canvas {
+    background-color: white;
+}
+
+.button {
+    text-decoration: none;
+    text-align: center;
+    background-color: red;
+    color: white;
+    line-height: 40px;
+    border: solid 3px white;
+}
+
+.button:hover{
+    background-color: #cc0000;
+}
+.toolbar__button {
+    position: relative;
+    top: -50px;
+    display: block;
+
+}
+
+
