@@ -67,7 +67,6 @@ function Canvas(id) {
 
     var that = this;
     var ctx = that.context;
-    this.context.save();
 
     function getPointerPosition(event) {
         that.pointer.x = event.pageX - that.bound.left;
@@ -103,7 +102,10 @@ Canvas.prototype.setPaintStyle = function (tool) {
 };
 
 Canvas.prototype.clear = function () {
-    this.ref.width = 871;
+    this.context.save();
+    this.context.fillStyle = "#FFFFFF";
+    this.context.fillRect(0, 0, this.ref.width, this.ref.height);
+    this.context.restore();
 };
 
 Canvas.prototype.save = function (link, filename) {
