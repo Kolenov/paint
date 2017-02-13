@@ -44,15 +44,15 @@
 
     <rect class="st0" width="128" height="480"/>
 
-     <g id="button-save">
-         <rect x="10" y="438" class="st1" width="108" height="32"/>
-         <text transform="matrix(1 0 0 1 30.5972 458.7813)" class="st2 button">Save As...</text>
-     </g>
+     <!--<g id="button-save">-->
+         <!--<rect x="10" y="438" class="st1" width="108" height="32"/>-->
+         <!--<text transform="matrix(1 0 0 1 30.5972 458.7813)" class="st2 button">Save As...</text>-->
+     <!--</g>-->
 
-    <g id="button-clear">
-        <rect x="10" y="399.3" class="st5" width="108" height="32"/>
-        <text transform="matrix(1 0 0 1 45.7729 420.0566)" class="st2 button">Clear</text>
-    </g>
+    <!--<g id="button-clear">-->
+        <!--<rect x="10" y="399.3" class="st5" width="108" height="32"/>-->
+        <!--<text transform="matrix(1 0 0 1 45.7729 420.0566)" class="st2 button">Clear</text>-->
+    <!--</g>-->
 
     <!-- Divider -->
     <use x="0" y="300" xlink:href="#divider" />

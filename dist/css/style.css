@@ -15,7 +15,6 @@ body {
 }
 
 .playground {
-    background-color: white;
     border: solid 1px;
 }
 
@@ -23,36 +22,58 @@ body {
     float: right;
     width: 128px;
     height: 480px;
-
+    background-color: #CCCCCC;
 }
 
 .toolbar {
     border-left: solid 1px;
-
 }
-
 
 .playground__canvas {
     float: left;
     height: 480px;
+    background-color: #ffffff;
 }
 
 .canvas {
     background-color: white;
 }
 
-.button {
-    text-decoration: none;
-    text-align: center;
-    background-color: red;
-    color: white;
-    line-height: 40px;
-    border: solid 3px white;
+.button__group {
+    font-size: 0.8em;
+    position: absolute;
+    width: 128px;
+    top: 480px;
+    transform: translate(0%, -100%);
 }
 
-.button:hover{
-    background-color: #cc0000;
+.button {
+    width: 90%;
+    margin: 5%;
+    display: block;
+    line-height: 2em;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    cursor: pointer;
 }
+
+.button_danger {
+    background-color: #FF0000;
+}
+
+.button_danger:hover {
+    background-color: #AA0000;
+}
+
+.button_primary {
+    background-color: #0275d8;;
+}
+
+.button_primary:hover {
+    background-color: #025aa5;
+}
+
 .toolbar__button {
     position: relative;
     top: -50px;

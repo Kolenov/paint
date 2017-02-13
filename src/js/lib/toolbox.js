@@ -9,9 +9,9 @@ function toolbox(canvas) {
     var swatches = toolBar.getElementById("swatches");
     var selectedColor = toolBar.getElementById("selected-color");
     var tools = toolBar.getElementById("tools");
-    var saveButton = toolBar.getElementById("button-save");
+    var saveButton = document.getElementById("button-save");
     var size = toolBar.getElementById("tool-size");
-    var clearButton = toolBar.getElementById("button-clear");
+    var clearButton = document.getElementById("button-clear");
     var currentTool = makeTool("pen");
 
     console.info("Base Tool Object:");
