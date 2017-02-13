@@ -1,83 +1,91 @@
+// Fat Stupid Ugly Controller
 var makeTool = require("./makeTool");
+var baseTool = require("./BaseTool");
 
 function toolbox(canvas) {
 
-    var swatches = document.getElementById("swatches");
-    var selectedColor = document.getElementById("selected-color");
-    var tools = document.getElementById("tools");
-    var saveButton = document.getElementById("save-button");
-    var size = document.getElementById("size");
-    var clear = document.getElementById("clear");
+    var svgObj = document.getElementById("tools");
+    var toolBar = svgObj.contentDocument;
+    var swatches = toolBar.getElementById("swatches");
+    var selectedColor = toolBar.getElementById("selected-color");
+    var tools = toolBar.getElementById("tools");
+    var saveButton = toolBar.getElementById("button-save");
+    var size = toolBar.getElementById("tool-size");
+    var clearButton = toolBar.getElementById("button-clear");
+    var currentTool = makeTool("pen");
 
-    clear.addEventListener("click", clearCanvas, false);
+    console.info("Base Tool Object:");
+    console.dir(baseTool);
+    console.info("Current Tool Object:");
+    console.dir(currentTool);
+
+    clearButton.addEventListener("click", clearCanvas, false);
+    swatches.addEventListener("click", setStyle, false);
+    swatches.addEventListener("click", setActive, false);
+    tools.addEventListener("click", setTool, false);
+    tools.addEventListener("click", setActive, false);
+    size.addEventListener("click", setSize, false);
+    size.addEventListener("click", setActive, false);
 
     function clearCanvas() {
-        canvas.context.fillStyle = "#FFFFFF";
-        canvas.context.fillRect(0, 0, canvas.ref.width, canvas.ref.height);
+        canvas.clear();
     }
 
     saveButton.addEventListener("click", function () {
         canvas.save(this);
     }, false);
 
-
-    (function () {
-        for (var i = 0; i < swatches.childElementCount; ++i) {
-            swatches.children[i].addEventListener("click", setStyle, false);
-        }
-    })();
-
-    (function () {
-        for (var i = 0; i < tools.childElementCount; ++i) {
-            tools.children[i].addEventListener("click", setTool, false);
-            tools.children[i].addEventListener("click", setActive, false);
-        }
-    }());
-
-    (function () {
-        for (var i = 0; i < size.childElementCount; ++i) {
-            size.children[i].addEventListener("click", setSize, false);
-            size.children[i].addEventListener("click", setActive, false);
-        }
-    }());
-
-    function setTool() {
-        var currentTool = makeTool(this.id);
-        canvas.currentTool = currentTool;
-        setContextPaintStyle(canvas.currentTool);
+    function setTool(event) {
+        var toolType = event.target.parentNode.id;
+        currentTool = makeTool(toolType);
+        setContextPaintStyle(currentTool);
+        console.info("Tool was setup:");
+        console.dir(currentTool);
     }
 
-    function setSize() {
-        var style = getComputedStyle(this);
-        canvas.currentTool.size = parseFloat(style.strokeWidth);
-        setContextPaintStyle(canvas.currentTool);
+    function setSize(event) {
+        var style = getTargetObjectStyle(event.target);
+        baseTool.lineWidth = parseFloat(style.strokeWidth);
+        setContextPaintStyle(currentTool);
+        console.info("Tool Size was setup for:");
+        console.dir(currentTool);
     }
 
-    function setStyle() {
+    function setStyle(event) {
+        var obj = event.target;
+        var style = getTargetObjectStyle(obj);
         selectedColor.removeAttribute("class");
-        selectedColor.setAttribute("class", this.getAttribute("class"));
-        var style = getComputedStyle(this);
-        canvas.currentTool.color = style.fill;
-        setContextPaintStyle(canvas.currentTool);
-        console.info(canvas.currentTool);
+        selectedColor.setAttribute("class", obj.getAttribute("class"));
+        baseTool.strokeStyle = style.fill;
+        baseTool.shadowColor = style.fill;
+        setContextPaintStyle(currentTool);
+        console.info("Color Style was setup for:");
+        console.dir(currentTool);
     }
 
     function setContextPaintStyle(tool) {
         canvas.setPaintStyle(tool);
-        console.info(tool);
     }
-    
-    function setActive() {
-        Array.prototype.forEach.call(this.parentNode.children, function (element) {
+
+    function setActive(event) {
+        var element = event.target.parentNode;
+        Array.prototype.forEach.call(element.parentNode.children, function (element) {
             setInactive(element);
         });
-        this.classList.toggle("active", true);
+        element.classList.toggle("active", true);
+        console.info("Event target: " + element.id);
     }
 
     function setInactive(element) {
         element.classList.remove("active");
-        console.info(element.classList);
     }
+
+    function getTargetObjectStyle(obj) {
+        var style = getComputedStyle(obj);
+        console.info("Picked Object Styles:");
+        return style;
+    }
+
 }
 
 module.exports = toolbox;

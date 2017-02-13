@@ -1,6 +1,25 @@
 "use strict";
-
-var setTool = require("./makeTool");
+// var contextDefault = {
+//     fillStyle: "#000000",
+//     filter: "none",
+//     font: "10px sans-serif",
+//     globalAlpha: 1,
+//     globalCompositeOperation: "source-over",
+//     imageSmoothingEnabled: true,
+//     imageSmoothingQuality: "low",
+//     lineCap: "butt",
+//     lineDashOffset: 0,
+//     lineJoin: "miter",
+//     lineWidth: 1,
+//     miterLimit: 10,
+//     shadowBlur: 0,
+//     shadowColor: "rgba(0, 0, 0, 0)",
+//     shadowOffsetX: 0,
+//     shadowOffsetY: 0,
+//     strokeStyle: "#000000",
+//     textAlign: "start",
+//     textBaseline: "alphabetic"
+// };
 
 function Canvas(id) {
     this.ref = document.getElementById(id);
@@ -16,11 +35,9 @@ function Canvas(id) {
         y: 0
     };
 
-    this.currentTool = setTool("brush");
-    this.setPaintStyle(this.currentTool);
-
     var that = this;
     var ctx = that.context;
+    this.context.save();
 
     function getPointerPosition(event) {
         that.pointer.x = event.pageX - that.bound.left;
@@ -45,11 +62,21 @@ function Canvas(id) {
     }
 }
 
-Canvas.prototype.setPaintStyle = function setTool(tool) {
-    tool.setPaintStyle(this.context);
+Canvas.prototype.setPaintStyle = function (tool) {
+    var ctx = this.context;
+
+    for (var props in tool) {
+        ctx[props] = tool[props];
+    }
+    console.info("Pain Style for canvas object was changed.")
+    console.dir(ctx);
 };
 
-Canvas.prototype.save = function save(link, filename) {
+Canvas.prototype.clear = function () {
+    this.ref.width = 871;
+};
+
+Canvas.prototype.save = function (link, filename) {
     var name = filename || "canvas";
     var time = new Date().getTime().toString();
     var data = this.ref.toDataURL();
