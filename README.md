@@ -2,4 +2,4 @@
 
 Practice project - ITschool Hillel
 
-https://kolenov.github.io/paint/
+https://kolenov.github.io/paint/index.html
